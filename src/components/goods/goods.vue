@@ -31,7 +31,7 @@
                     <span class="old">{{ food.oldPrice }}</span>
                   </div>
                   <div class="cartcontrol-wrapper">
-                    <cartControl :food="food" v-on:cart-add="cartAdd"></cartControl>
+                    <cartcontrol :food="food" v-on:cart-add="cartAdd"></cartcontrol>
                   </div>
                 </div>
               </li>
@@ -41,13 +41,13 @@
       </div>
       <shopcart ref="shopcart" :selectFoods="selectFoods" :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice"></shopcart>
     </div>
-    <food :food="selectedFood" ref="food"></food>
+    <food :food="selectedFood" ref="food" v-on:cart-add="cartAdd"></food>
   </div>
 </template>
 <script>
   import BScroll from 'better-scroll'
   import shopcart from 'components/shopcart/shopcart'
-  import cartControl from 'components/cartcontrol/cartcontrol'
+  import cartcontrol from 'components/cartcontrol/cartcontrol'
   import food from 'components/food/food'
 
   const ERR_Ok = 0
@@ -111,7 +111,7 @@
         this.$nextTick(() => {
           this.$refs.shopcart.drop(target)
         })        
-      } ,
+      },
       selectFood (food) {
         this.selectedFood = food
         this.$refs.food.show()
@@ -144,7 +144,7 @@
     },
     components: {
       shopcart,
-      cartControl,
+      cartcontrol,
       food
     }
   }
@@ -247,7 +247,7 @@
               font-size: 14px
               color: rgb(240, 20, 20)
             .old
-              text-decration: line-through
+              text-decoration: line-through
               font-size: 10px
               color: rgb(147, 153, 159)
           .cartcontrol-wrapper
