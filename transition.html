@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+  <style type="text/css">
+    .wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      width: 800px;
+    }
+    .list-item {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border: 1px solid #000;
+      box-sizing: border-box;
+      transition: all 1s;
+    }
+    .list-leave-active {
+      position: absolute;
+    }
+    .list-enter, .list-leave-to {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="list-demo" class="demo">
+    <button v-on:click="shuffle">Shuffle</button>
+    <button v-on:click="add">Add</button>
+    <button v-on:click="remove">Remove</button>
+    <transition-group name="list" tag="p" class="wrapper">
+      <span v-for="item in items" v-bind:key="item" class="list-item">
+        {{ item }}
+      </span>
+    </transition-group>
+    <input v-model="query">
+    <transition-group
+      name="staggered-fade"
+      tag="ul"
+      v-bind:css="false"
+      v-on:before-enter="beforeEnter"
+      v-on:enter="enter"
+      v-on:leave="leave"
+    >
+      <li
+        v-for="(item, index) in computedList"
+        v-bind:key="item.msg"
+        v-bind:data-index="index"
+      >{{ item.msg }}</li>
+    </transition-group>
+  </div>
+
+  <script type="text/javascript">
+    new Vue({
+      el: '#list-demo',
+      data: {
+        items: [1,2,3,4,5,6,7,8,9],
+        nextNum: 10,
+        query: '',
+        list: [
+          { msg: 'Bruce Lee' },
+          { msg: 'Jackie Chan' },
+          { msg: 'Chuck Norris' },
+          { msg: 'Jet Li' },
+          { msg: 'Kung Fury' }
+        ]
+      },
+      computed: {
+        computedList: function () {
+          var vm = this
+          return this.list.filter(function (item) {
+            //这是filter的检测条件 数组中的每个元素都执行，判断元素是否符合条件
+            return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1
+          })
+        }
+      },
+      methods: {
+        randomIndex: function () {
+          return Math.floor(Math.random() * this.items.length)
+        },
+        add: function () {
+          this.items.splice(this.randomIndex(), 0, this.nextNum++)
+        },
+        remove: function () {
+          this.items.splice(this.randomIndex(), 1)
+        },
+        shuffle: function () {
+          this.items = _.shuffle(this.items)
+        },
+        beforeEnter: function (el) {
+          el.style.opacity = 0
+          el.style.height = 0
+        },
+        enter: function (el, done) {
+          var delay = el.dataset.index * 150
+          setTimeout(function () {
+            Velocity(
+              el,
+              { opacity: 1, height: '1.6em' },
+              { complete: done }
+            )
+          }, delay)
+        },
+        leave: function (el, done) {
+          var delay = el.dataset.index * 150
+          setTimeout(function () {
+            Velocity(
+              el,
+              { opacity: 0, height: 0 },
+              { complete: done }
+            )
+          }, delay)
+        }        
+      }
+    })
+  </script>
+</body>
+</html>
