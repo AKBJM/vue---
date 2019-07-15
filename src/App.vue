@@ -17,6 +17,7 @@
 </template>
 <script>
 import header from './components/header/header.vue'
+import { urlParse } from './common/js/util'
 
 //方便理解和维护 定义一个常量ERR_OK
 const ERR_OK = 0
@@ -24,7 +25,12 @@ const ERR_OK = 0
 export default {
   data () {
     return {
-      seller: {}
+      seller: {
+        id: (() => {
+          let queryParam = urlParse()
+          console.log('queryParam')
+        })
+      }
     }
   },
   created () {
