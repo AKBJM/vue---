@@ -213,7 +213,8 @@
       left: 0
       width: 100%
       height: 100%
-      overflow: auto      
+      overflow: auto
+      opacity: 1  
       backdrop-filter: blur(10px)
       background: rgba(7, 17, 27, 0.8)
       &.fade-enter-active, &.fade-leave-active

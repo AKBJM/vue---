@@ -25,9 +25,9 @@
       <div class="ball-container">
         <transition-group 
           name="drop"
-          v-on:before-enter="beforeEnter"
-          v-on:enter="enter"
-          v-on:after-enter="afterEnter"
+          @before-enter="beforeEnter"
+          @enter="enter"
+          @after-enter="afterEnter"
         >
           <div v-for="(ball, index) in balls" v-show="ball.show" key="index" class="ball">
             <div class="inner inner-hook"></div>
@@ -155,7 +155,7 @@
           }
         }
       },
-      enter (el) {
+      enter (el, done) {
         /* eslint-disable no-unused-vars */
         let rf = el.offsetHeight
         this.$nextTick(() => {
@@ -164,6 +164,7 @@
           let inner = el.getElementsByClassName('inner-hook')[0]
           inner.style.webkitTransform = 'translate3d(0, 0, 0)'
           inner.style.transform = 'translate3d(0, 0, 0)'
+          el.addEventListener('transitioned', done)
         })
       },
       afterEnter (el) {
