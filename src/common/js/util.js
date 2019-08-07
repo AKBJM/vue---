@@ -1,5 +1,5 @@
 /**
- * 解析url参数
+ * 解析url参数 确定商家
  * @example ?id=12345&a=b
  * @return Object {id: 12345, a: b}
  */ 
