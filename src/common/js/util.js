@@ -4,9 +4,10 @@
  * @return Object {id: 12345, a: b}
  */ 
 export function urlParse() {
-
+  // url从？开始的部分 
   let url = window.location.search
   let obj = {}
+  // 匹配以？或&开头且后边没有？或&的一个或多个字符到=在匹配没有？或&的一个或多个字符
   let reg = /[?&][^?&]+=[^?&]+/g
   let arr = url.match(reg)
   //['?id=12345', '&a=b']

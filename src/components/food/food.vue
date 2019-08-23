@@ -70,7 +70,7 @@
   import cartcontrol from 'components/cartcontrol/cartcontrol'
   import split from "components/split/split"
   import ratingselect from "components/ratingselect/ratingselect"
-  import { formatDate } from "../../common/js/date"
+  import { formatDate } from "@/common/js/date"
 
   const POSITIVE = 0
   const NEGATIVE = 1

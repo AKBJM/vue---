@@ -46,9 +46,9 @@
 </template>
 <script>
   import BScroll from 'better-scroll'
-  import shopcart from 'components/shopcart/shopcart'
-  import cartcontrol from 'components/cartcontrol/cartcontrol'
-  import food from 'components/food/food'
+  import Shopcart from 'components/shopcart/shopcart'
+  import Cartcontrol from 'components/cartcontrol/cartcontrol'
+  import Food from 'components/food/food'
 
   const ERR_Ok = 0
 
@@ -85,7 +85,7 @@
       _initScroll () {
         this.menuScroll = new BScroll(this.$refs.menuWrapper, { click: true })
 
-        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, { click: true,probeType: 3 })
+        this.foodsScroll = new BScroll(this.$refs.foodsWrapper, { click: true, probeType: 3 })
 
         this.foodsScroll.on('scroll', (pos) => {
           this.scrollY = Math.abs(Math.round(pos.y))
@@ -143,9 +143,9 @@
       }
     },
     components: {
-      shopcart,
-      cartcontrol,
-      food
+      Shopcart,
+      Cartcontrol,
+      Food
     }
   }
 </script>
@@ -155,7 +155,7 @@
     display: flex
     position: absolute
     top: 174px
-    bottom: 46px
+    bottom: 48px
     width: 100%
     overflow: hidden
     .menu-wrapper
